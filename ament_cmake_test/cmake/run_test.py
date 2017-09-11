@@ -19,8 +19,8 @@ import codecs
 import errno
 import os
 import re
-import sys
 import subprocess
+import sys
 from xml.etree.ElementTree import ElementTree
 from xml.etree.ElementTree import ParseError
 from xml.sax.saxutils import quoteattr
@@ -91,10 +91,7 @@ def main(argv=sys.argv[1:]):
 
     if args.skip_test:
         # generate a skipped test result file
-        skipped_result_file = _generate_result(
-            args.result_file,
-            skip=True
-        )
+        skipped_result_file = _generate_result(args.result_file, skip=True)
         with open(args.result_file, 'w') as h:
             h.write(skipped_result_file)
         return 0
@@ -103,8 +100,7 @@ def main(argv=sys.argv[1:]):
     # in case the command segfaults or timeouts and does not generate one
     failure_result_file = _generate_result(
         args.result_file,
-        failure_message='The test did not generate a result file.'
-    )
+        failure_message='The test did not generate a result file.')
     with open(args.result_file, 'w') as h:
         h.write(failure_result_file)
 
@@ -129,20 +125,40 @@ def main(argv=sys.argv[1:]):
         env = dict(os.environ)
         if args.env:
             log('-- run_test.py: extra environment variables:')
+            previous_key = None
+            updated_env_keys = set()
             for env_str in args.env:
-                key, value = separate_env_vars(env_str, 'env', parser)
-                log(' - {0}={1}'.format(key, value))
+                # if CMake has split a single value containing semicolons
+                # into multiple arguments they are put back together here
+                if previous_key and '=' not in env_str:
+                    key = previous_key
+                    value = env[key] + ';' + env_str
+                else:
+                    key, value = separate_env_vars(env_str, 'env', parser)
                 env[key] = value
+                updated_env_keys.add(key)
+                previous_key = key
+            for key in updated_env_keys:
+                log(' - {0}={1}'.format(key, env[key]))
         if args.append_env:
             log('-- run_test.py: extra environment variables to append:')
+            previous_key = None
             for env_str in args.append_env:
-                key, value = separate_env_vars(env_str, 'append-env', parser)
-                log(' - {0}={1}'.format(key, value))
+                # if CMake has split a single value containing semicolons
+                # into multiple arguments they are put back together here
+                if previous_key and '=' not in env_str:
+                    key = previous_key
+                    value = env[key] + ';' + env_str
+                    log(' - {0}+={1}'.format(key, env_str))
+                else:
+                    key, value = separate_env_vars(env_str, 'append-env', parser)
+                    log(' - {0}+={1}'.format(key, value))
                 if key not in env:
                     env[key] = ''
                 if not env[key].endswith(os.pathsep):
                     env[key] += os.pathsep
                 env[key] += value
+                previous_key = key
 
     log("-- run_test.py: invoking following command in '%s':\n - %s" %
         (os.getcwd(), ' '.join(args.command)))
@@ -153,8 +169,7 @@ def main(argv=sys.argv[1:]):
     try:
         proc = subprocess.Popen(
             args.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-            env=env
-        )
+            env=env)
         while True:
             line = proc.stdout.readline()
             if not line:
@@ -199,8 +214,7 @@ def main(argv=sys.argv[1:]):
             # regenerate result file to include output / exception of the invoked command
             failure_result_file = _generate_result(
                 args.result_file,
-                failure_message='The test did not generate a result file:\n\n' + output
-            )
+                failure_message='The test did not generate a result file:\n\n' + output)
             with open(args.result_file, 'w') as h:
                 h.write(failure_result_file)
 
@@ -253,12 +267,12 @@ def _generate_result(result_file, *, failure_message=None, skip=False):
     skipped_message = \
         '<skipped type="skip" message="">![CDATA[Test Skipped by developer]]</skipped>' \
         if skip else ''
-    return '''<?xml version="1.0" encoding="UTF-8"?>
+    return """<?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="%s" tests="1" failures="%d" time="0" errors="0" skip="%d">
   <testcase classname="%s" name="%s.missing_result" status="%s" time="0">
     %s%s
   </testcase>
-</testsuite>\n''' % \
+</testsuite>\n""" % \
         (
             pkgname,
             1 if failure_message else 0,
@@ -294,7 +308,7 @@ def _tidy_xml(filename):
         char = unichr
     except NameError:
         char = chr
-    RE_XML_ILLEGAL = (
+    re_xml_illegal = (
         '([%s-%s%s-%s%s-%s%s-%s])' +
         '|' +
         '([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])') % \
@@ -303,9 +317,9 @@ def _tidy_xml(filename):
          char(0xd800), char(0xdbff), char(0xdc00), char(0xdfff),
          char(0xd800), char(0xdbff), char(0xdc00), char(0xdfff),
          char(0xd800), char(0xdbff), char(0xdc00), char(0xdfff))
-    SAFE_XML_REGEX = re.compile(RE_XML_ILLEGAL)
+    safe_xml_regex = re.compile(re_xml_illegal)
 
-    for match in SAFE_XML_REGEX.finditer(data):
+    for match in safe_xml_regex.finditer(data):
         data = data[:match.start()] + '?' + data[match.end():]
 
     with open(filename, 'w') as h:
