@@ -1,0 +1,12 @@
+Source: ros-ardent-ament-cmake-export-link-flags
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-ardent-ament-cmake-core
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-ardent-ament-cmake-export-link-flags
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-ardent-ament-cmake-core
+Description: The ability to export link flags to downstream packages in the ament buildsystem.
