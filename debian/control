@@ -1,0 +1,12 @@
+Source: ros-ardent-ament-cmake-gmock
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-ardent-ament-cmake-core, ros-ardent-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-ardent-ament-cmake-gmock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, google-mock, ros-ardent-ament-cmake-gtest, ros-ardent-ament-cmake-test, ros-ardent-gmock-vendor, ros-ardent-ros-workspace
+Description: The ability to add Google mock-based tests in the ament buildsystem in CMake.
