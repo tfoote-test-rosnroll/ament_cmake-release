@@ -1,0 +1,12 @@
+Source: ros-crystal-ament-cmake
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), cmake, ros-crystal-ament-cmake-core, ros-crystal-ament-cmake-export-dependencies, ros-crystal-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-crystal-ament-cmake
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, cmake, ros-crystal-ament-cmake-core, ros-crystal-ament-cmake-export-definitions, ros-crystal-ament-cmake-export-dependencies, ros-crystal-ament-cmake-export-include-directories, ros-crystal-ament-cmake-export-interfaces, ros-crystal-ament-cmake-export-libraries, ros-crystal-ament-cmake-export-link-flags, ros-crystal-ament-cmake-libraries, ros-crystal-ament-cmake-python, ros-crystal-ament-cmake-target-dependencies, ros-crystal-ament-cmake-test, ros-crystal-ros-workspace
+Description: The entry point package for the ament buildsystem in CMake.
