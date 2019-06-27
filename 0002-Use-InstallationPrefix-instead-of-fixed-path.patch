@@ -1,0 +1,26 @@
+From fb9ad25bb4e14bbc04bbe8410bf3951d6bf8c4fd Mon Sep 17 00:00:00 2001
+From: Michael Carroll <michael@openrobotics.org>
+Date: Thu, 27 Jun 2019 16:38:34 -0500
+Subject: [PATCH 2/2] Use @(InstallationPrefix) instead of fixed path
+
+Signed-off-by: Michael Carroll <michael@openrobotics.org>
+---
+ debian/rules.em | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/debian/rules.em b/debian/rules.em
+index 031f1df4..55197977 100755
+--- a/debian/rules.em
++++ b/debian/rules.em
+@@ -19,7 +19,7 @@ export PKG_CONFIG_PATH=@(InstallationPrefix)/lib/pkgconfig
+ export DEB_CXXFLAGS_MAINT_APPEND=-DNDEBUG
+ 
+ # Needed to bootstrap since the ros_workspace package does not yet exist.
+-export PYTHONPATH=/opt/ros/dashing/lib/python3.6/site-packages
++export PYTHONPATH=/opt/ros/eloquent/lib/python3.6/site-packages
+ 
+ %:
+ 	dh $@@ -v --buildsystem=cmake
+-- 
+2.17.1
+
