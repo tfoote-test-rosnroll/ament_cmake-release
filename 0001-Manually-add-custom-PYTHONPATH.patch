@@ -1,0 +1,26 @@
+From 4506acb0517711d7ba094a035f6609ef5da24e63 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?= <steven@nuclearsandwich.com>
+Date: Mon, 8 Apr 2019 15:43:06 -0700
+Subject: [PATCH] Manually add custom PYTHONPATH.
+
+---
+ debian/rules.em | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/debian/rules.em b/debian/rules.em
+index 9c9604d9..031f1df4 100755
+--- a/debian/rules.em
++++ b/debian/rules.em
+@@ -18,6 +18,9 @@ export PKG_CONFIG_PATH=@(InstallationPrefix)/lib/pkgconfig
+ # 	https://github.com/ros-infrastructure/bloom/issues/327
+ export DEB_CXXFLAGS_MAINT_APPEND=-DNDEBUG
+ 
++# Needed to bootstrap since the ros_workspace package does not yet exist.
++export PYTHONPATH=/opt/ros/dashing/lib/python3.6/site-packages
++
+ %:
+ 	dh $@@ -v --buildsystem=cmake
+ 
+-- 
+2.17.1
+
