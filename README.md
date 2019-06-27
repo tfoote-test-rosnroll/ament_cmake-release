@@ -1,3 +1,45 @@
+## ament_cmake (eloquent) - 0.7.3-3
+
+The packages in the `ament_cmake` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent --new-track --track eloquent ament_cmake` on `Thu, 27 Jun 2019 21:30:20 -0000`
+
+The `ament_cmake_core` package was released.
+
+These packages were explicitly ignored:
+- `ament_cmake`
+- `ament_cmake_auto`
+- `ament_cmake_export_definitions`
+- `ament_cmake_export_dependencies`
+- `ament_cmake_export_include_directories`
+- `ament_cmake_export_interfaces`
+- `ament_cmake_export_libraries`
+- `ament_cmake_export_link_flags`
+- `ament_cmake_gmock`
+- `ament_cmake_gtest`
+- `ament_cmake_include_directories`
+- `ament_cmake_libraries`
+- `ament_cmake_nose`
+- `ament_cmake_pytest`
+- `ament_cmake_python`
+- `ament_cmake_target_dependencies`
+- `ament_cmake_test`
+
+Version of package(s) in repository `ament_cmake`:
+
+- upstream repository: https://github.com/ament/ament_cmake.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `0.7.3-2`
+- new version: `0.7.3-3`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.12`
+- rosdep version: `0.15.2`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.40`
+
+
 ## ament_cmake (eloquent) - 0.7.3-2
 
 The packages in the `ament_cmake` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent --new-track --track eloquent ament_cmake` on `Thu, 27 Jun 2019 20:53:06 -0000`
