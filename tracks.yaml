@@ -110,13 +110,12 @@ tracks:
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc}
     devel_branch: eloquent
-    last_release: master
     last_version: 0.8.1
     name: upstream
     patches: null
     release_inc: '1'
     release_repo_url: null
-    release_tag: master
+    release_tag: :{version}
     ros_distro: eloquent
     vcs_type: git
     vcs_uri: https://github.com/ament/ament_cmake.git
