@@ -46,7 +46,7 @@ macro(ament_export_library_names)
         # keep build configuration keyword as-is
         list(APPEND _AMENT_EXPORT_LIBRARY_NAMES "${_library_name}")
       else()
-        if(_library_dirs)
+        if(_library_dirs_suffix)
           # append library directories to library name
           set(_library_name "${_library_name}:${_library_dirs}")
         endif()
