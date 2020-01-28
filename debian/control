@@ -1,0 +1,12 @@
+Source: ros-foxy-ament-cmake-gmock
+Section: misc
+Priority: optional
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake-core, ros-foxy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-foxy-ament-cmake-gmock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, google-mock, ros-foxy-ament-cmake-gtest, ros-foxy-ament-cmake-test, ros-foxy-gmock-vendor, ros-foxy-ros-workspace
+Description: The ability to add Google mock-based tests in the ament buildsystem in CMake.
