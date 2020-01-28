@@ -25,14 +25,16 @@
 # :type COMMAND: list of strings
 # :param OUTPUT_FILE: the path of the file to pipe the output to
 # :type OUTPUT_FILE: string
+# :param RUNNER: the path to the test runner script (default: run_test.py).
+# :type RUNNER: string
 # :param TIMEOUT: the test timeout in seconds, default: 60
 # :type TIMEOUT: integer
 # :param WORKING_DIRECTORY: the working directory for invoking the
-#   command in, default: CMAKE_SOURCE_DIR
+#   command in, default: CMAKE_CURRENT_BINARY_DIR
 # :type WORKING_DIRECTORY: string
 # :param GENERATE_RESULT_FOR_RETURN_CODE_ZERO: generate a test result
 #   file when the command invocation returns with code zero
-#   command in, default: CMAKE_SOURCE_DIR
+#   command in, default: FALSE
 # :type GENERATE_RESULT_FOR_RETURN_CODE_ZERO: option
 # :param SKIP_TEST: if set mark the test as being skipped
 # :type SKIP_TEST: option
@@ -50,7 +52,7 @@
 function(ament_add_test testname)
   cmake_parse_arguments(ARG
     "GENERATE_RESULT_FOR_RETURN_CODE_ZERO;SKIP_TEST"
-    "OUTPUT_FILE;RESULT_FILE;TIMEOUT;WORKING_DIRECTORY"
+    "OUTPUT_FILE;RESULT_FILE;RUNNER;TIMEOUT;WORKING_DIRECTORY"
     "APPEND_ENV;APPEND_LIBRARY_DIRS;COMMAND;ENV"
     ${ARGN})
   if(ARG_UNPARSED_ARGUMENTS)
@@ -64,6 +66,9 @@ function(ament_add_test testname)
   if(NOT ARG_RESULT_FILE)
     set(ARG_RESULT_FILE "${AMENT_TEST_RESULTS_DIR}/${PROJECT_NAME}/${testname}.xml")
   endif()
+  if(NOT ARG_RUNNER)
+    set(ARG_RUNNER "${ament_cmake_test_DIR}/run_test.py")
+  endif()
   if(NOT ARG_TIMEOUT)
     set(ARG_TIMEOUT 60)
   endif()
@@ -72,11 +77,11 @@ function(ament_add_test testname)
       "valid number and greater than zero")
   endif()
   if(NOT ARG_WORKING_DIRECTORY)
-    set(ARG_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+    set(ARG_WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
   endif()
 
   # wrap command with run_test script to ensure test result generation
-  set(cmd_wrapper "${PYTHON_EXECUTABLE}" "-u" "${ament_cmake_test_DIR}/run_test.py"
+  set(cmd_wrapper "${PYTHON_EXECUTABLE}" "-u" "${ARG_RUNNER}"
     "${ARG_RESULT_FILE}"
     "--package-name" "${PROJECT_NAME}")
   if(ARG_SKIP_TEST)

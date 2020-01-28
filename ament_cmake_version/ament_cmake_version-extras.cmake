@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-
-# Copyright 2014-2015 Open Source Robotics Foundation, Inc.
+# Copyright 2019 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
+# copied from
+# ament_cmake_version/ament_cmake_version-extras.cmake
 
-import ament_cmake_test
+find_package(ament_cmake_core QUIET REQUIRED)
 
-
-if __name__ == '__main__':
-    sys.exit(ament_cmake_test.main())
+include(
+  "${ament_cmake_version_DIR}/ament_export_development_version_if_higher_than_manifest.cmake")
