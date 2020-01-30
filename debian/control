@@ -1,0 +1,12 @@
+Source: ros-foxy-ament-cmake
+Section: misc
+Priority: optional
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), cmake, ros-foxy-ament-cmake-core, ros-foxy-ament-cmake-export-dependencies, ros-foxy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-foxy-ament-cmake
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, cmake, ros-foxy-ament-cmake-core, ros-foxy-ament-cmake-export-definitions, ros-foxy-ament-cmake-export-dependencies, ros-foxy-ament-cmake-export-include-directories, ros-foxy-ament-cmake-export-interfaces, ros-foxy-ament-cmake-export-libraries, ros-foxy-ament-cmake-export-link-flags, ros-foxy-ament-cmake-libraries, ros-foxy-ament-cmake-python, ros-foxy-ament-cmake-target-dependencies, ros-foxy-ament-cmake-test, ros-foxy-ament-cmake-version, ros-foxy-ros-workspace
+Description: The entry point package for the ament buildsystem in CMake.
