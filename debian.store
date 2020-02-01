@@ -1,1 +1,1 @@
-{"trim": "", "base": "372e811a", "trimbase": "", "parent": "debian/eloquent/ament_cmake_export_libraries", "previous": "1d3e3b4f"}
+{"base": "cb1dc25a", "parent": "debian/verystable/ament_cmake_export_libraries", "previous": "2b05b7a3", "trim": "", "trimbase": ""}
