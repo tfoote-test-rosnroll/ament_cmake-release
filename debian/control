@@ -1,0 +1,12 @@
+Source: ros-verystable-ament-cmake
+Section: misc
+Priority: optional
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), cmake, ros-verystable-ament-cmake-core, ros-verystable-ament-cmake-export-dependencies, ros-verystable-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-verystable-ament-cmake
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, cmake, ros-verystable-ament-cmake-core, ros-verystable-ament-cmake-export-definitions, ros-verystable-ament-cmake-export-dependencies, ros-verystable-ament-cmake-export-include-directories, ros-verystable-ament-cmake-export-interfaces, ros-verystable-ament-cmake-export-libraries, ros-verystable-ament-cmake-export-link-flags, ros-verystable-ament-cmake-libraries, ros-verystable-ament-cmake-python, ros-verystable-ament-cmake-target-dependencies, ros-verystable-ament-cmake-test, ros-verystable-ament-cmake-version, ros-verystable-ros-workspace
+Description: The entry point package for the ament buildsystem in CMake.
